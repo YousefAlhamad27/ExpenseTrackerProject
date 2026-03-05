@@ -28,66 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelClose = new Label();
-            txtAmount = new PlaceholderTextBox();
-            comboBox1 = new ComboBox();
-            label4 = new Label();
+            btSave = new CustomButton();
             label3 = new Label();
             label1 = new Label();
+            txtCatName = new PlaceholderTextBox();
+            labelClose = new Label();
             SuspendLayout();
             // 
-            // labelClose
+            // btSave
             // 
-            labelClose.AutoSize = true;
-            labelClose.Cursor = Cursors.Hand;
-            labelClose.Font = new Font("Segoe UI", 13F);
-            labelClose.ForeColor = Color.DarkGray;
-            labelClose.Location = new Point(491, 9);
-            labelClose.Name = "labelClose";
-            labelClose.Size = new Size(26, 30);
-            labelClose.TabIndex = 21;
-            labelClose.Text = "X";
-            labelClose.Click += labelClose_Click;
-            // 
-            // txtAmount
-            // 
-            txtAmount.Font = new Font("Segoe UI", 10.8F);
-            txtAmount.Location = new Point(171, 185);
-            txtAmount.Name = "txtAmount";
-            txtAmount.PlaceholderText = "0.00 USD";
-            txtAmount.Size = new Size(286, 31);
-            txtAmount.TabIndex = 20;
-            // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(171, 93);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(286, 33);
-            comboBox1.TabIndex = 19;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.ForeColor = Color.Gainsboro;
-            label4.Location = new Point(21, 185);
-            label4.Name = "label4";
-            label4.Size = new Size(83, 28);
-            label4.TabIndex = 18;
-            label4.Text = "Amount";
+            btSave.BackColor = Color.Gray;
+            btSave.BackgroundColor = Color.Gray;
+            btSave.BorderColor = Color.PaleVioletRed;
+            btSave.BorderRadius = 20;
+            btSave.BorderSize = 0;
+            btSave.Cursor = Cursors.Hand;
+            btSave.FlatAppearance.BorderSize = 0;
+            btSave.FlatStyle = FlatStyle.Flat;
+            btSave.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btSave.ForeColor = Color.White;
+            btSave.Location = new Point(1, 148);
+            btSave.Name = "btSave";
+            btSave.Size = new Size(506, 45);
+            btSave.TabIndex = 25;
+            btSave.Text = "Save";
+            btSave.TextColor = Color.White;
+            btSave.UseVisualStyleBackColor = false;
+            btSave.Click += btSave_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
             label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(17, 93);
+            label3.Location = new Point(11, 69);
             label3.Name = "label3";
             label3.Size = new Size(92, 28);
-            label3.TabIndex = 17;
+            label3.TabIndex = 24;
             label3.Text = "Category";
             // 
             // label1
@@ -95,22 +72,43 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 23);
+            label1.Location = new Point(6, 2);
             label1.Name = "label1";
-            label1.Size = new Size(196, 32);
-            label1.TabIndex = 16;
-            label1.Text = "Add Subscription";
+            label1.Size = new Size(160, 32);
+            label1.TabIndex = 23;
+            label1.Text = "Add Category";
+            // 
+            // txtCatName
+            // 
+            txtCatName.Font = new Font("Segoe UI", 10.8F);
+            txtCatName.Location = new Point(142, 69);
+            txtCatName.Name = "txtCatName";
+            txtCatName.PlaceholderText = "ex: games";
+            txtCatName.Size = new Size(286, 31);
+            txtCatName.TabIndex = 26;
+            // 
+            // labelClose
+            // 
+            labelClose.AutoSize = true;
+            labelClose.Cursor = Cursors.Hand;
+            labelClose.Font = new Font("Segoe UI", 13F);
+            labelClose.ForeColor = Color.DarkGray;
+            labelClose.Location = new Point(481, 4);
+            labelClose.Name = "labelClose";
+            labelClose.Size = new Size(26, 30);
+            labelClose.TabIndex = 27;
+            labelClose.Text = "X";
+            labelClose.Click += labelClose_Click;
             // 
             // AddCategoryForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
-            ClientSize = new Size(524, 257);
+            ClientSize = new Size(506, 217);
             Controls.Add(labelClose);
-            Controls.Add(txtAmount);
-            Controls.Add(comboBox1);
-            Controls.Add(label4);
+            Controls.Add(txtCatName);
+            Controls.Add(btSave);
             Controls.Add(label3);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
@@ -123,11 +121,10 @@
 
         #endregion
 
-        private Label labelClose;
-        private PlaceholderTextBox txtAmount;
-        private ComboBox comboBox1;
-        private Label label4;
+        private CustomButton btSave;
         private Label label3;
         private Label label1;
+        private PlaceholderTextBox txtCatName;
+        private Label labelClose;
     }
 }

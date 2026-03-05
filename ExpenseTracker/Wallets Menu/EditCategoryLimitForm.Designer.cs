@@ -28,68 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            customButton1 = new CustomButton();
-            customButton2 = new CustomButton();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            btRemove = new CustomButton();
+            btSave = new CustomButton();
+            txtNewLimit = new TextBox();
+            txtCurrent = new TextBox();
             lbMaxAmount = new Label();
             label2 = new Label();
-            label1 = new Label();
             SuspendLayout();
             // 
-            // customButton1
+            // btRemove
             // 
-            customButton1.BackColor = Color.Red;
-            customButton1.BackgroundColor = Color.Red;
-            customButton1.BorderColor = Color.PaleVioletRed;
-            customButton1.BorderRadius = 20;
-            customButton1.BorderSize = 0;
-            customButton1.Cursor = Cursors.Hand;
-            customButton1.FlatAppearance.BorderSize = 0;
-            customButton1.FlatStyle = FlatStyle.Flat;
-            customButton1.ForeColor = Color.White;
-            customButton1.Location = new Point(213, 139);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(102, 50);
-            customButton1.TabIndex = 0;
-            customButton1.Text = "Remove";
-            customButton1.TextColor = Color.White;
-            customButton1.UseVisualStyleBackColor = false;
+            btRemove.BackColor = Color.Red;
+            btRemove.BackgroundColor = Color.Red;
+            btRemove.BorderColor = Color.PaleVioletRed;
+            btRemove.BorderRadius = 20;
+            btRemove.BorderSize = 0;
+            btRemove.Cursor = Cursors.Hand;
+            btRemove.FlatAppearance.BorderSize = 0;
+            btRemove.FlatStyle = FlatStyle.Flat;
+            btRemove.ForeColor = Color.White;
+            btRemove.Location = new Point(213, 139);
+            btRemove.Name = "btRemove";
+            btRemove.Size = new Size(102, 50);
+            btRemove.TabIndex = 0;
+            btRemove.Text = "Remove";
+            btRemove.TextColor = Color.White;
+            btRemove.UseVisualStyleBackColor = false;
+            btRemove.Click += btRemove_Click;
             // 
-            // customButton2
+            // btSave
             // 
-            customButton2.BackColor = Color.Gray;
-            customButton2.BackgroundColor = Color.Gray;
-            customButton2.BorderColor = Color.PaleVioletRed;
-            customButton2.BorderRadius = 20;
-            customButton2.BorderSize = 0;
-            customButton2.Cursor = Cursors.Hand;
-            customButton2.FlatAppearance.BorderSize = 0;
-            customButton2.FlatStyle = FlatStyle.Flat;
-            customButton2.ForeColor = Color.White;
-            customButton2.Location = new Point(52, 139);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new Size(102, 50);
-            customButton2.TabIndex = 1;
-            customButton2.Text = "Edit";
-            customButton2.TextColor = Color.White;
-            customButton2.UseVisualStyleBackColor = false;
+            btSave.BackColor = Color.Gray;
+            btSave.BackgroundColor = Color.Gray;
+            btSave.BorderColor = Color.PaleVioletRed;
+            btSave.BorderRadius = 20;
+            btSave.BorderSize = 0;
+            btSave.Cursor = Cursors.Hand;
+            btSave.FlatAppearance.BorderSize = 0;
+            btSave.FlatStyle = FlatStyle.Flat;
+            btSave.ForeColor = Color.White;
+            btSave.Location = new Point(52, 139);
+            btSave.Name = "btSave";
+            btSave.Size = new Size(102, 50);
+            btSave.TabIndex = 1;
+            btSave.Text = "Save";
+            btSave.TextColor = Color.White;
+            btSave.UseVisualStyleBackColor = false;
+            btSave.Click += btSave_Click;
             // 
-            // textBox1
+            // txtNewLimit
             // 
-            textBox1.Cursor = Cursors.IBeam;
-            textBox1.Location = new Point(107, 32);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(176, 27);
-            textBox1.TabIndex = 2;
+            txtNewLimit.Cursor = Cursors.IBeam;
+            txtNewLimit.Location = new Point(107, 32);
+            txtNewLimit.Name = "txtNewLimit";
+            txtNewLimit.Size = new Size(176, 27);
+            txtNewLimit.TabIndex = 2;
+            txtNewLimit.KeyPress += txtNewLimit_KeyPress;
             // 
-            // textBox2
+            // txtCurrent
             // 
-            textBox2.Cursor = Cursors.IBeam;
-            textBox2.Location = new Point(107, 80);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(176, 27);
-            textBox2.TabIndex = 3;
+            txtCurrent.Cursor = Cursors.IBeam;
+            txtCurrent.Location = new Point(107, 80);
+            txtCurrent.Name = "txtCurrent";
+            txtCurrent.Size = new Size(176, 27);
+            txtCurrent.TabIndex = 3;
             // 
             // lbMaxAmount
             // 
@@ -113,33 +115,18 @@
             label2.TabIndex = 5;
             label2.Text = "Current:";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Cursor = Cursors.Hand;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Green;
-            label1.Location = new Point(312, -4);
-            label1.Name = "label1";
-            label1.Size = new Size(24, 28);
-            label1.TabIndex = 6;
-            label1.Text = "X";
-            label1.Click += label1_Click;
-            // 
             // EditCategoryLimitForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(336, 201);
-            Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(lbMaxAmount);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(customButton2);
-            Controls.Add(customButton1);
+            Controls.Add(txtCurrent);
+            Controls.Add(txtNewLimit);
+            Controls.Add(btSave);
+            Controls.Add(btRemove);
             FormBorderStyle = FormBorderStyle.None;
             Name = "EditCategoryLimitForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -150,12 +137,11 @@
 
         #endregion
 
-        private CustomButton customButton1;
-        private CustomButton customButton2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private CustomButton btRemove;
+        private CustomButton btSave;
+        private TextBox txtNewLimit;
+        private TextBox txtCurrent;
         private Label lbMaxAmount;
         private Label label2;
-        private Label label1;
     }
 }

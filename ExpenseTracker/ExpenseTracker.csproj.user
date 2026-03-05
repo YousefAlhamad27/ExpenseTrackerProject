@@ -4,7 +4,7 @@
     <Compile Update="Additions\CustomDatePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="AddWalletControlcs.cs">
+    <Compile Update="DashBoard Menu\AddWalletControlcs.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoard Menu\AddWalletForm.cs">
@@ -19,10 +19,13 @@
     <Compile Update="DashBoard Menu\WalletCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="EditTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MoneyCard.cs">
+    <Compile Update="DashBoard Menu\MoneyCard.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Additions\PlaceholderTextBox.cs">
@@ -31,31 +34,25 @@
     <Compile Update="Additions\SegmentedControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="MultiUseRectangle.cs">
+    <Compile Update="Additions\MultiUseRectangle.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="SettingsMenu\SettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="TotalMoneyControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="TransactionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="TransactionItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="TransactionRow.cs">
+    <Compile Update="DashBoard Menu\SubscriptionRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoard Menu\WalletControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="DashBoard Menu\WalletsPanelControlcs.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Wallets Menu\AddCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Wallets Menu\AddCategoryLimitForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Wallets Menu\AddSubscriptionForm.cs">
@@ -70,13 +67,13 @@
     <Compile Update="Wallets Menu\EditCategoryLimitForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Wallets Menu\EditSubscriptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Wallets Menu\IncomeExpenseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Wallets Menu\SubscriptionItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Wallets Menu\SubscriptionOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Wallets Menu\TransactionsPanel.cs">

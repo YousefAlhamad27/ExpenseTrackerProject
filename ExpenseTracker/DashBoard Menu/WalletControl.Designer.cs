@@ -52,6 +52,7 @@
             customButton1.TextAlign = ContentAlignment.BottomLeft;
             customButton1.TextColor = Color.Black;
             customButton1.UseVisualStyleBackColor = false;
+            customButton1.Click += customButton1_Click;
             // 
             // label1
             // 

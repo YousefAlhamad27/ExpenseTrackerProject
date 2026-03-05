@@ -178,7 +178,7 @@
             DateTimePicker.Name = "DateTimePicker";
             DateTimePicker.Size = new Size(506, 48);
             DateTimePicker.TabIndex = 11;
-            DateTimePicker.Value = new DateTime(2026, 1, 16, 12, 5, 6, 545);
+            DateTimePicker.Value = new DateTime(2026, 2, 14, 12, 45, 34, 0);
             // 
             // btSave
             // 

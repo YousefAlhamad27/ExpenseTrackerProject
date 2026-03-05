@@ -28,50 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionsPanel));
+            flowLayoutPanel1 = new FlowLayoutPanel();
             lbDate = new Label();
-            transactionItem2 = new TransactionItem();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(0, 0);
+            flowLayoutPanel1.TabIndex = 3;
             // 
             // lbDate
             // 
             lbDate.AutoSize = true;
             lbDate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbDate.ForeColor = Color.Black;
-            lbDate.Location = new Point(16, 0);
+            lbDate.Location = new Point(3, 0);
             lbDate.Name = "lbDate";
             lbDate.Size = new Size(65, 28);
-            lbDate.TabIndex = 1;
+            lbDate.TabIndex = 2;
             lbDate.Text = "label1";
             // 
-            // transactionItem2
+            // flowLayoutPanel2
             // 
-            transactionItem2.Amount = "amount";
-            transactionItem2.BackColor = Color.FromArgb(30, 30, 30);
-            transactionItem2.Dock = DockStyle.Bottom;
-            transactionItem2.Icon = (Image)resources.GetObject("transactionItem2.Icon");
-            transactionItem2.Location = new Point(0, 39);
-            transactionItem2.Name = "transactionItem2";
-            transactionItem2.Size = new Size(742, 88);
-            transactionItem2.TabIndex = 2;
-            transactionItem2.Title = "name";
-            transactionItem2.TransactionId = 0;
+            flowLayoutPanel2.AutoScroll = true;
+            flowLayoutPanel2.Controls.Add(lbDate);
+            flowLayoutPanel2.Dock = DockStyle.Fill;
+            flowLayoutPanel2.Location = new Point(0, 0);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(874, 227);
+            flowLayoutPanel2.TabIndex = 4;
             // 
             // TransactionsPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Transparent;
-            Controls.Add(transactionItem2);
-            Controls.Add(lbDate);
+            Controls.Add(flowLayoutPanel2);
+            Controls.Add(flowLayoutPanel1);
             Name = "TransactionsPanel";
-            Size = new Size(742, 127);
+            Size = new Size(874, 227);
+            flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+        private FlowLayoutPanel flowLayoutPanel1;
         private Label lbDate;
-        private TransactionItem transactionItem2;
+        private FlowLayoutPanel flowLayoutPanel2;
     }
 }

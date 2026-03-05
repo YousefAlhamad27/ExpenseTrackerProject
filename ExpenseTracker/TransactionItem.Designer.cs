@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             pictureBox1 = new PictureBox();
             lbAmount = new Label();
             lbCategory = new Label();
             pictureBox2 = new PictureBox();
+            toolTip = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -104,5 +106,6 @@
         private Label lbAmount;
         private Label lbCategory;
         private PictureBox pictureBox2;
+        private ToolTip toolTip;
     }
 }

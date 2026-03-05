@@ -23,7 +23,37 @@ namespace TrackerBussinessLogic
             CategoryID = 0;
             CategoryName = string.Empty;
         }
+        static public clsCategory GetCategory(int categoryID)
+        {
+            try
+            {
+                using (var _context = new AppDbContext(DatabaseConfig.Options))
+                {
+                    return _context.Categories.FirstOrDefault(c => c.CategoryID == categoryID);
+                }
 
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                return null;
+            }
+        }
+        static  public List<clsCategory> GetAllCategories()
+        {
+            try
+            {
+                using (var _context = new AppDbContext(DatabaseConfig.Options))
+                {
+                    return _context.Categories.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                return new List<clsCategory>();
+            }
+        }
         public bool Save()
         {
             try

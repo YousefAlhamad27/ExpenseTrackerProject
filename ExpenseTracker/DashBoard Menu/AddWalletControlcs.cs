@@ -14,7 +14,7 @@ namespace ExpenseTracker
 {
     public partial class AddWalletControlcs : UserControl
     {
-       
+       public event EventHandler<EventArgs> WalletAdded;    
         public AddWalletControlcs( )
         {
             InitializeComponent();
@@ -72,7 +72,7 @@ namespace ExpenseTracker
             double balance = double.Parse(txtBalance.Text);
             string name=txtName.Text.Trim();
             int currencyID = comboBox1.SelectedIndex+1;
-            clsWallet wallet=new clsWallet(0,txtName.Text.Trim(),Convert.ToDecimal(balance), currencyID, DateTime.Now);
+            clsWallet wallet=new clsWallet(0,txtName.Text.Trim(),Convert.ToDecimal(balance), currencyID, DateTime.Now,true);
             
 
             if (!wallet.Save())
@@ -83,6 +83,7 @@ namespace ExpenseTracker
             else
             {
                 MessageBox.Show("Wallet Added Successfully!","Done",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                WalletAdded?.Invoke(this, EventArgs.Empty);
             }
         }
     }

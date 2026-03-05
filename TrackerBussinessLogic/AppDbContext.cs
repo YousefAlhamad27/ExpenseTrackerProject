@@ -16,10 +16,10 @@ namespace TrackerBussinessLogic
       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Only configure if it hasn't been configured yet (i.e., by Migrations)
+           
             if (!optionsBuilder.IsConfigured)
             {
-                // PASTE YOUR CONNECTION STRING HERE
+                
                 optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=ExpenseTracker;Integrated Security=True;TrustServerCertificate=True");
             }
         }
@@ -29,12 +29,33 @@ namespace TrackerBussinessLogic
         public DbSet<clsTransactionType> TransactionTypes { get; set; }
         public DbSet<clsCurrency> Currencies { get; set; }
         public DbSet<clsTransfer> Transfers { get; set; }
+        public DbSet<clsSettings> Settings { get; set; }
+        public DbSet<clsCategoryLimit> CategoryLimits { get; set; }
+        public DbSet<clsSubscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.Entity<clsCurrency>()
                 .HasKey(c => c.CurrencyID);
+            modelBuilder.Entity<clsSettings>()
+                .HasNoKey();
+
+            modelBuilder.Entity<clsCategoryLimit>(
+                entity =>
+                {
+                    entity.HasKey(cl => cl.CategoryLimitID);
+                    entity.HasOne<clsCategory>()
+                          .WithMany()
+                          .HasForeignKey(cl => cl.CategoryID)
+                          .OnDelete(DeleteBehavior.Restrict);
+
+
+                }
+
+                );
+                
+
 
             modelBuilder.Entity<clsWallet>(entity =>
             {
@@ -62,7 +83,17 @@ namespace TrackerBussinessLogic
                       .OnDelete(DeleteBehavior.Restrict);
             });
                 
-                
+                modelBuilder.Entity<clsSubscription>(entity =>
+                {
+                    entity.HasKey(s => s.SubscriptionID);
+                  entity.HasOne<clsCategory>()
+                        .WithMany()
+                        .HasForeignKey(s => s.CategoryID)
+                        .OnDelete(DeleteBehavior.Restrict);
+                    entity.HasOne<clsWallet>().WithMany()
+                          .HasForeignKey(s => s.WalletID)
+                          .OnDelete(DeleteBehavior.Restrict);
+                });
 
             modelBuilder.Entity<clsTransaction>(entity =>
             {
@@ -82,6 +113,11 @@ namespace TrackerBussinessLogic
                      .WithMany()
                      .HasForeignKey(sa => sa.CategoryID)
                      .OnDelete(DeleteBehavior.Restrict);
+
+                //entity.HasOne<clsSubscription>()
+                //     .WithMany().HasForeignKey(sa => sa.SubscriptionID).OnDelete(DeleteBehavior.SetNull);
+
+
 
 
 

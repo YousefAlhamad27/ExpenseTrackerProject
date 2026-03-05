@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
             lbText = new Label();
             lbAmount = new Label();
+            lbPaid = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox2
@@ -47,18 +46,9 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             pictureBox2.MouseLeave += pictureBox2_MouseLeave;
             pictureBox2.MouseHover += pictureBox2_MouseHover;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Dock = DockStyle.Left;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 74);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // lbText
             // 
@@ -82,27 +72,37 @@
             lbAmount.TabIndex = 3;
             lbAmount.Text = "5000 USD";
             // 
+            // lbPaid
+            // 
+            lbPaid.AutoSize = true;
+            lbPaid.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbPaid.ForeColor = Color.White;
+            lbPaid.Location = new Point(16, 3);
+            lbPaid.Name = "lbPaid";
+            lbPaid.Size = new Size(57, 20);
+            lbPaid.TabIndex = 4;
+            lbPaid.Text = "Unpaid";
+            // 
             // SubscriptionItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
+            Controls.Add(lbPaid);
             Controls.Add(lbAmount);
             Controls.Add(lbText);
             Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
             Name = "SubscriptionItem";
             Size = new Size(393, 74);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
         private Label lbText;
         private Label lbAmount;
+        private Label lbPaid;
     }
 }

@@ -14,9 +14,13 @@ namespace ExpenseTracker.DashBoard_Menu
 
     public partial class WalletCard : UserControl
     {
-        public WalletCard()
+        public event EventHandler<int> CardClicked;
+        private int _walletID;
+        public WalletCard(int walletID)
         {
             InitializeComponent();
+            _walletID = walletID;
+            toolTip1.SetToolTip(this, "Navigate To Wallet");
         }
         public string WalletName
         {
@@ -28,6 +32,21 @@ namespace ExpenseTracker.DashBoard_Menu
         {
             get { return lbAmount.Text; }
             set { lbAmount.Text = value; }
+        }
+
+        private void WalletCard_MouseEnter(object sender, EventArgs e)
+        {
+            CardClicked?.Invoke(this, _walletID);
+        }
+
+        private void WalletCard_MouseHover(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(35, 35, 35);
+        }
+
+        private void WalletCard_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor= Color.FromArgb(30, 30, 30);
         }
     }
 }

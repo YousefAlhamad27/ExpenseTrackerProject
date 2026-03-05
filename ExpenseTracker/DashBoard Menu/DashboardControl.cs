@@ -14,36 +14,43 @@ namespace ExpenseTracker
 {
     public partial class DashboardControl : UserControl
     {
+        public event EventHandler<int> WalletCardClicked;
+        public event EventHandler<EventArgs> WalletAdded;
         public DashboardControl()
         {
             InitializeComponent();
             this.BackColor = Color.Transparent;
-
+            
+            toolTip.SetToolTip(pictureBox1, "Refresh Dashboard.");
+            toolTip.SetToolTip(btAddWallet,"Add new wallet.");
+           
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
         private void LoadWallets()
         {
             WalletsLayoutPanel.Controls.Clear();
-             List<clsWallet> wallets = clsWallet.GetAllWallets();
+            List<clsWallet> wallets = clsWallet.GetAllWallets();
 
-            foreach(clsWallet wallet in wallets)
+            foreach (clsWallet wallet in wallets)
             {
-                WalletCard card = new WalletCard();
-              
-               
-                card.WalletName=wallet.Name;
+                WalletCard card = new WalletCard(wallet.WalletID);
+                card.Click += (s, e) => WalletCardClicked?.Invoke(s, wallet.WalletID);
+
+                card.WalletName = wallet.Name;
+
                 //card.WalletName = "Wallet" + DateTime.Now.Ticks;
                 string currencyCode = clsCurrency.GetCurrencyCodeByID(wallet.CurrencyID);
-                card.WalletBalance=wallet.Balance.ToString("F2") + " " + currencyCode;
-                
+                card.WalletBalance = ((float)wallet.Balance).ToString("F2") + " " + currencyCode;
+
 
                 WalletsLayoutPanel.Controls.Add(card);
             }
-            
+
         }
         private void LoadTransactions()
         {
@@ -51,69 +58,84 @@ namespace ExpenseTracker
 
 
 
-            //var myData = GetTransactionsFromDB();
+           
 
-            //  foreach (var data in myData)
-            // {
-            // 1. Create a new instance of your Custom Design
-
-
-            // 2. Fill it with data
-            //item.Title = data.Description; // "Disney Plus"
-            //item.Amount = data.Amount + " EUR"; // "15 EUR"
-            //item.TransactionId = data.Id;
-
-            for (int i = 0; i < 2; i++)
+            List<clsTransaction> transactions = clsTransaction.GetAllTransactions();
+            foreach (clsTransaction transaction in transactions)
             {
-                TransactionItem item = new TransactionItem();
-                item.Title = "Disney Plus";
-                item.Amount = 15.5 + " EUR";
-                item.TransactionId = 41;
-                item.Width = SubscriptionPanel.Width - 25;
-                flowLayoutPanel1.Controls.Add(item);
-                item.Title = "Spotify";
-                item.Amount = 5 + " US";
-                item.TransactionId = 14;
-                item.Width = SubscriptionPanel.Width - 25;
+                TransactionItem item = new TransactionItem(transaction.TransactionID);
+                item.Title = transaction.Description;
+                clsWallet wallet = clsWallet.GetWalletByID(transaction.WalletID);
+                string currencyCode = clsCurrency.GetCurrencyCodeByID(wallet.CurrencyID);
+
+                item.Amount = ((float)transaction.Amount).ToString() + " " + currencyCode;
+                item.Width = flowLayoutPanel1.Width - 40;
                 flowLayoutPanel1.Controls.Add(item);
             }
 
 
 
-
-            //}
+            
         }
 
         private void LoadMoneyCards()
         {
             MoneyPanel.Controls.Clear();
+            List<clsWallet> wallets = clsWallet.GetAllWallets();
 
-            // Example loop
-            for (int i = 0; i < 5; i++)
+           
+            foreach (clsWallet wallet in wallets)
             {
-                MoneyCard row = new MoneyCard();
-                row.Currency = "USD";
-                row.Amount = "9.99 USD";
+                string currencyCode = clsCurrency.GetCurrencyCodeByID(wallet.CurrencyID);
 
-                // You can load images from your Resources
-                // row.Icon = Properties.Resources.netflix_icon; 
+                if (MoneyPanel.Controls.Count==0)
+                {
+                    MoneyCard row = new MoneyCard();
+                    row.Currency = currencyCode ;
+                    row.Amount = $"{(float)wallet.Balance}";
+                    row.Width = SubscriptionPanel.Width - 25;
 
-                // Make it full width of the list
-                row.Width = SubscriptionPanel.Width - 25;
+                    MoneyPanel.Controls.Add(row);
+                    continue;
+                }
+                foreach (MoneyCard card in MoneyPanel.Controls.OfType<MoneyCard>())
+                {
+                    if (card.Currency == currencyCode)
+                    {
+                        card.Amount = ((Convert.ToDecimal(card.Amount) +wallet.Balance)).ToString();
+                        break;
+                    }
+                    else
+                    {
+                        MoneyCard row = new MoneyCard();
+                        row.Currency = currencyCode;
+                        row.Amount = $"{(float)wallet.Balance}";
+                        row.Width = SubscriptionPanel.Width - 25;
+                        MoneyPanel.Controls.Add(row);
+                        break;
+                    }
+                }
 
-                MoneyPanel.Controls.Add(row);
+                
+
+               
+                
             }
         }
-        private void LoadTransactionRows()
+        private void LoadSubscriptionRows()
         {
             SubscriptionPanel.Controls.Clear();
+            List<clsSubscription> subscriptions = clsSubscription.GetAll();
 
-            // Example loop
-            for (int i = 0; i < 5; i++)
+            foreach (clsSubscription subscription in subscriptions)
             {
-                TransactionRow row = new TransactionRow();
-                row.Title = "Netflix Subscription";
-                row.Amount = "9.99 USD";
+                clsWallet wallet = clsWallet.GetWalletByID(subscription.WalletID);
+                string currencyCode = clsCurrency.GetCurrencyCodeByID(wallet.CurrencyID);
+
+
+                SubscriptionRow row = new SubscriptionRow();
+                row.Title = subscription.Description;
+                row.Amount = $"{(float)subscription.Amount} {currencyCode}";
 
                 // You can load images from your Resources
                 // row.Icon = Properties.Resources.netflix_icon; 
@@ -127,18 +149,32 @@ namespace ExpenseTracker
         private void DashboardControl_Load(object sender, EventArgs e)
         {
             LoadTransactions();
-            LoadTransactionRows();
+            LoadSubscriptionRows();
             LoadMoneyCards();
             LoadWallets();
         }
 
+
         private void btAddWallet_Click(object sender, EventArgs e)
         {
             AddWalletForm addWalletForm = new AddWalletForm();
-            
+            addWalletForm.WalletAdded += (s, args) => WalletAdded?.Invoke(s, args);
             addWalletForm.ShowDialog();
             LoadWallets();
-            //load money cards again to reflect new wallet
+            LoadMoneyCards();
+        }
+        private void RefreshData()
+        {
+            LoadTransactions();
+            LoadSubscriptionRows();
+            LoadMoneyCards();
+            LoadWallets();
+        }
+      
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }

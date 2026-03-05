@@ -12,27 +12,41 @@ namespace ExpenseTracker.Wallets_Menu
 {
     public partial class AddTransactionForm : Form
     {
-        private TransferControl transferControl = new TransferControl();
-        private IncomeExpenseControl incomeControl = new IncomeExpenseControl(IncomeExpenseControl.TransactionType.Income);
-        private IncomeExpenseControl expenseControl = new IncomeExpenseControl(IncomeExpenseControl.TransactionType.Expense);
-        private short currentIndex = 0;
+        private short currentIndex = 1;
+        private int sourceWalletID;
+        private TransferControl transferControl;
+        private IncomeExpenseControl incomeControl;
+        private IncomeExpenseControl expenseControl;
+      
+       
 
-        public AddTransactionForm()
+        public AddTransactionForm(int sourceWalletID)
         {
             InitializeComponent();
+            this.sourceWalletID = sourceWalletID;
             LoadControls();
+            
         }
         private void LoadControls()
         {
-            panel1.Controls.Add(expenseControl);
+           transferControl = new TransferControl(sourceWalletID);
+           incomeControl = new IncomeExpenseControl(IncomeExpenseControl.TransactionType.Income,sourceWalletID);
+           expenseControl = new IncomeExpenseControl(IncomeExpenseControl.TransactionType.Expense, sourceWalletID);
+            
+
+        panel1.Controls.Add(expenseControl);
             panel1.Controls.Add(incomeControl);
             panel1.Controls.Add(transferControl);
             incomeControl.Dock = DockStyle.Fill;
             expenseControl.Dock = DockStyle.Fill;
             transferControl.Dock = DockStyle.Fill;
 
-            incomeControl.Visible = false;
-            expenseControl.Visible = true;
+
+      
+
+
+        incomeControl.Visible = true;
+            expenseControl.Visible = false;
             transferControl.Visible = false;
         }
 
@@ -46,6 +60,7 @@ namespace ExpenseTracker.Wallets_Menu
                 incomeControl.Visible = false;
                 transferControl.Visible = false;
                 currentIndex = 0;
+          
 
             }
             else if (segmentedControl1.SelectedIndex == 1)
@@ -56,6 +71,7 @@ namespace ExpenseTracker.Wallets_Menu
                 incomeControl.Visible = true;
                 transferControl.Visible = false;
                 currentIndex = 1;
+            
             }
             else if (segmentedControl1.SelectedIndex == 2)
             {

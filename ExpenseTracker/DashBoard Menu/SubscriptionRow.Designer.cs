@@ -1,6 +1,6 @@
-﻿namespace ExpenseTracker.Wallets_Menu
+﻿namespace ExpenseTracker
 {
-    partial class SubscriptionOptions
+    partial class SubscriptionRow
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,13 +30,14 @@
         {
             SuspendLayout();
             // 
-            // SubscriptionOptions
+            // TransactionRow
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(30, 30, 30);
-            Name = "SubscriptionOptions";
-            Size = new Size(509, 312);
+            BackColor = SystemColors.ActiveCaptionText;
+            Name = "TransactionRow";
+            Size = new Size(239, 71);
+            Load += TransactionRow_Load;
             ResumeLayout(false);
         }
 

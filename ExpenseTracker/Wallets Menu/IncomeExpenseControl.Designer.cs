@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             customButton1 = new CustomButton();
-            customDatePicker1 = new CustomDatePicker();
-            placeholderTextBox2 = new PlaceholderTextBox();
+            DateTimePicker = new CustomDatePicker();
+            txtAmount = new PlaceholderTextBox();
             label3 = new Label();
-            placeholderTextBox3 = new PlaceholderTextBox();
+            txtDesc = new PlaceholderTextBox();
             label6 = new Label();
-            comboBox2 = new ComboBox();
+            cbCat = new ComboBox();
             label1 = new Label();
             label2 = new Label();
             linkLabel1 = new LinkLabel();
@@ -61,27 +61,28 @@
             customButton1.UseVisualStyleBackColor = false;
             customButton1.Click += customButton1_Click;
             // 
-            // customDatePicker1
+            // DateTimePicker
             // 
-            customDatePicker1.BackColor = Color.DarkGray;
-            customDatePicker1.Icon = Properties.Resources.selection_date_1;
-            customDatePicker1.Location = new Point(16, 259);
-            customDatePicker1.Name = "customDatePicker1";
-            customDatePicker1.Size = new Size(506, 48);
-            customDatePicker1.TabIndex = 13;
-            customDatePicker1.Value = new DateTime(2026, 1, 16, 12, 5, 6, 545);
+            DateTimePicker.BackColor = Color.DarkGray;
+            DateTimePicker.Icon = Properties.Resources.selection_date_1;
+            DateTimePicker.Location = new Point(16, 259);
+            DateTimePicker.Name = "DateTimePicker";
+            DateTimePicker.Size = new Size(506, 48);
+            DateTimePicker.TabIndex = 13;
+            DateTimePicker.Value = new DateTime(2026, 2, 14, 0, 0, 0, 0);
             // 
-            // placeholderTextBox2
+            // txtAmount
             // 
-            placeholderTextBox2.BackColor = Color.DarkGray;
-            placeholderTextBox2.BorderStyle = BorderStyle.FixedSingle;
-            placeholderTextBox2.Cursor = Cursors.IBeam;
-            placeholderTextBox2.Font = new Font("Segoe UI", 10.8F);
-            placeholderTextBox2.Location = new Point(15, 54);
-            placeholderTextBox2.Name = "placeholderTextBox2";
-            placeholderTextBox2.PlaceholderText = "0.00 USD";
-            placeholderTextBox2.Size = new Size(210, 31);
-            placeholderTextBox2.TabIndex = 16;
+            txtAmount.BackColor = Color.DarkGray;
+            txtAmount.BorderStyle = BorderStyle.FixedSingle;
+            txtAmount.Cursor = Cursors.IBeam;
+            txtAmount.Font = new Font("Segoe UI", 10.8F);
+            txtAmount.Location = new Point(15, 54);
+            txtAmount.Name = "txtAmount";
+            txtAmount.PlaceholderText = "0.00 USD";
+            txtAmount.Size = new Size(210, 31);
+            txtAmount.TabIndex = 16;
+            txtAmount.KeyPress += txtAmount_KeyPress;
             // 
             // label3
             // 
@@ -94,17 +95,17 @@
             label3.TabIndex = 15;
             label3.Text = "Amount";
             // 
-            // placeholderTextBox3
+            // txtDesc
             // 
-            placeholderTextBox3.BackColor = Color.DarkGray;
-            placeholderTextBox3.BorderStyle = BorderStyle.FixedSingle;
-            placeholderTextBox3.Cursor = Cursors.IBeam;
-            placeholderTextBox3.Font = new Font("Segoe UI", 10.8F);
-            placeholderTextBox3.Location = new Point(291, 54);
-            placeholderTextBox3.Name = "placeholderTextBox3";
-            placeholderTextBox3.PlaceholderText = "Bought a new Phone";
-            placeholderTextBox3.Size = new Size(230, 31);
-            placeholderTextBox3.TabIndex = 18;
+            txtDesc.BackColor = Color.DarkGray;
+            txtDesc.BorderStyle = BorderStyle.FixedSingle;
+            txtDesc.Cursor = Cursors.IBeam;
+            txtDesc.Font = new Font("Segoe UI", 10.8F);
+            txtDesc.Location = new Point(291, 54);
+            txtDesc.Name = "txtDesc";
+            txtDesc.PlaceholderText = "Bought a new Phone";
+            txtDesc.Size = new Size(230, 31);
+            txtDesc.TabIndex = 18;
             // 
             // label6
             // 
@@ -117,16 +118,16 @@
             label6.TabIndex = 17;
             label6.Text = "Description";
             // 
-            // comboBox2
+            // cbCat
             // 
-            comboBox2.BackColor = Color.DarkGray;
-            comboBox2.FlatStyle = FlatStyle.System;
-            comboBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(16, 140);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(506, 36);
-            comboBox2.TabIndex = 20;
+            cbCat.BackColor = Color.DarkGray;
+            cbCat.FlatStyle = FlatStyle.System;
+            cbCat.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cbCat.FormattingEnabled = true;
+            cbCat.Location = new Point(16, 140);
+            cbCat.Name = "cbCat";
+            cbCat.Size = new Size(506, 36);
+            cbCat.TabIndex = 20;
             // 
             // label1
             // 
@@ -163,6 +164,7 @@
             linkLabel1.TabIndex = 22;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "+ Add Category";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // IncomeExpenseControl
             // 
@@ -171,14 +173,14 @@
             BackColor = Color.FromArgb(30, 30, 30);
             Controls.Add(linkLabel1);
             Controls.Add(label2);
-            Controls.Add(comboBox2);
+            Controls.Add(cbCat);
             Controls.Add(label1);
-            Controls.Add(placeholderTextBox3);
+            Controls.Add(txtDesc);
             Controls.Add(label6);
-            Controls.Add(placeholderTextBox2);
+            Controls.Add(txtAmount);
             Controls.Add(label3);
             Controls.Add(customButton1);
-            Controls.Add(customDatePicker1);
+            Controls.Add(DateTimePicker);
             Name = "IncomeExpenseControl";
             Size = new Size(548, 373);
             ResumeLayout(false);
@@ -188,12 +190,12 @@
         #endregion
 
         private CustomButton customButton1;
-        private CustomDatePicker customDatePicker1;
-        private PlaceholderTextBox placeholderTextBox2;
+        private CustomDatePicker DateTimePicker;
+        private PlaceholderTextBox txtAmount;
         private Label label3;
-        private PlaceholderTextBox placeholderTextBox3;
+        private PlaceholderTextBox txtDesc;
         private Label label6;
-        private ComboBox comboBox2;
+        private ComboBox cbCat;
         private Label label1;
         private Label label2;
         private LinkLabel linkLabel1;

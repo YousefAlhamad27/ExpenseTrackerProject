@@ -11,8 +11,8 @@ namespace TrackerBussinessLogic
         public int TransferID { get; set; }
         public int SourceWalletID { get; set; }
         public int DestinationWalletID { get; set; }
-        public double FirstAmount { get; set; }
-        public double SecondAmount { get; set; }
+        public decimal FirstAmount { get; set; }
+        public decimal SecondAmount { get; set; }
         public int TransactionID { get; set; }
 
         public clsTransfer()
@@ -24,7 +24,25 @@ namespace TrackerBussinessLogic
             SecondAmount = 0;
         }
 
-        public clsTransfer(int transferID, int sourceWalletID, int destinationWalletID, double firstAmount, double secondAmount )
+        static public clsTransfer getTransferByTransID(int transactionID)
+        {
+
+            try
+            {
+                using (var _context = new AppDbContext(DatabaseConfig.Options))
+                {
+                     
+                    return _context.Transfers.FirstOrDefault(t => t.TransactionID == transactionID)!;
+                }
+
+            }
+            catch
+            {
+                               return null!;
+            }
+        }
+
+        public clsTransfer(int transferID, int sourceWalletID, int destinationWalletID, decimal firstAmount, decimal secondAmount )
         {
             TransferID = transferID;
             SourceWalletID = sourceWalletID;

@@ -19,14 +19,21 @@ namespace ExpenseTracker
             Categories = 3,
             Settings = 2
 
-            // other items
+            
         }
         eMenuIndex selectedMenuIndex;
 
+        private void NewWalletAdded(object sender, EventArgs e)
+        {
+             walletsMenuControl.RefreshWallets();
+        }
         public MainForm()
         {
             InitializeComponent();
 
+            dashboardControl.WalletCardClicked += WalletCardClicked;
+            settingsPanel.WalletCardClicked += WalletCardClicked;
+            dashboardControl.WalletAdded += (s, e) =>NewWalletAdded(s, e);
             FormLoad();
         }
 
@@ -49,7 +56,20 @@ namespace ExpenseTracker
             MainViewPanel.Controls[2].Visible = false;
             btDashBoard.Enabled = false;
         }
+        private async void WalletCardClicked(object sender, int walletID)
+        {
 
+            try
+            {
+                await walletsMenuControl.ShowWallet(walletID);
+                 btWalletsMenu.PerformClick();
+            }
+            catch
+            {
+                return;
+            }
+           
+        }
 
 
         private void btDashBoard_Click(object sender, EventArgs e)

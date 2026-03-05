@@ -12,8 +12,8 @@ using TrackerBussinessLogic;
 namespace TrackerBussinessLogic.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260205094411_sss")]
-    partial class sss
+    [Migration("20260218102823_addedWalletIDToSub")]
+    partial class addedWalletIDToSub
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,27 @@ namespace TrackerBussinessLogic.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("TrackerBussinessLogic.clsCategoryLimit", b =>
+                {
+                    b.Property<int>("CategoryLimitID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryLimitID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryLimitID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("CategoryLimits");
+                });
+
             modelBuilder.Entity("TrackerBussinessLogic.clsCurrency", b =>
                 {
                     b.Property<int>("CurrencyID")
@@ -62,10 +83,56 @@ namespace TrackerBussinessLogic.Migrations
                     b.ToTable("Currencies");
                 });
 
+            modelBuilder.Entity("TrackerBussinessLogic.clsSettings", b =>
+                {
+                    b.Property<byte>("SalaryDay")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("ThemeColor")
+                        .HasColumnType("bit");
+
+                    b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("TrackerBussinessLogic.clsSubscription", b =>
+                {
+                    b.Property<int>("SubscriptionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastPaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WalletID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubscriptionID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("WalletID");
+
+                    b.ToTable("Subscriptions");
+                });
+
             modelBuilder.Entity("TrackerBussinessLogic.clsTransaction", b =>
                 {
                     b.Property<int>("TransactionID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionID"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -78,6 +145,9 @@ namespace TrackerBussinessLogic.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubscriptionID")
+                        .HasColumnType("int");
 
                     b.Property<int>("TransactionTypeID")
                         .HasColumnType("int");
@@ -124,11 +194,11 @@ namespace TrackerBussinessLogic.Migrations
                     b.Property<int>("DestinationWalletID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("FirstAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("FirstAmount")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("SecondAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SecondAmount")
+                        .HasColumnType("float");
 
                     b.Property<int>("SourceWalletID")
                         .HasColumnType("int");
@@ -141,6 +211,9 @@ namespace TrackerBussinessLogic.Migrations
                     b.HasIndex("DestinationWalletID");
 
                     b.HasIndex("SourceWalletID");
+
+                    b.HasIndex("TransactionID")
+                        .IsUnique();
 
                     b.ToTable("Transfers");
                 });
@@ -168,10 +241,21 @@ namespace TrackerBussinessLogic.Migrations
 
                     b.HasKey("WalletID");
 
+                    b.HasIndex("CurrencyID");
+
                     b.ToTable("Wallets");
                 });
 
-            modelBuilder.Entity("TrackerBussinessLogic.clsTransaction", b =>
+            modelBuilder.Entity("TrackerBussinessLogic.clsCategoryLimit", b =>
+                {
+                    b.HasOne("TrackerBussinessLogic.clsCategory", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrackerBussinessLogic.clsSubscription", b =>
                 {
                     b.HasOne("TrackerBussinessLogic.clsCategory", null)
                         .WithMany()
@@ -179,9 +263,18 @@ namespace TrackerBussinessLogic.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TrackerBussinessLogic.clsTransfer", null)
-                        .WithOne()
-                        .HasForeignKey("TrackerBussinessLogic.clsTransaction", "TransactionID")
+                    b.HasOne("TrackerBussinessLogic.clsWallet", null)
+                        .WithMany()
+                        .HasForeignKey("WalletID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrackerBussinessLogic.clsTransaction", b =>
+                {
+                    b.HasOne("TrackerBussinessLogic.clsCategory", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -209,6 +302,21 @@ namespace TrackerBussinessLogic.Migrations
                     b.HasOne("TrackerBussinessLogic.clsWallet", null)
                         .WithMany()
                         .HasForeignKey("SourceWalletID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TrackerBussinessLogic.clsTransaction", null)
+                        .WithOne()
+                        .HasForeignKey("TrackerBussinessLogic.clsTransfer", "TransactionID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrackerBussinessLogic.clsWallet", b =>
+                {
+                    b.HasOne("TrackerBussinessLogic.clsCurrency", null)
+                        .WithMany()
+                        .HasForeignKey("CurrencyID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

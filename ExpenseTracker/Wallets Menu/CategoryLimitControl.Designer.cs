@@ -32,7 +32,7 @@
             pictureBox1 = new PictureBox();
             label1 = new Label();
             lbAmount = new Label();
-            label2 = new Label();
+            lbRemaining = new Label();
             label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -69,21 +69,21 @@
             // 
             lbAmount.AutoSize = true;
             lbAmount.Font = new Font("Segoe UI", 11F);
-            lbAmount.Location = new Point(171, 6);
+            lbAmount.Location = new Point(168, 6);
             lbAmount.Name = "lbAmount";
             lbAmount.Size = new Size(79, 25);
             lbAmount.TabIndex = 3;
             lbAmount.Text = "Amount";
             // 
-            // label2
+            // lbRemaining
             // 
-            label2.AutoSize = true;
-            label2.ForeColor = SystemColors.ControlLight;
-            label2.Location = new Point(253, 11);
-            label2.Name = "label2";
-            label2.Size = new Size(31, 20);
-            label2.TabIndex = 4;
-            label2.Text = "left";
+            lbRemaining.AutoSize = true;
+            lbRemaining.ForeColor = SystemColors.ControlLight;
+            lbRemaining.Location = new Point(282, 11);
+            lbRemaining.Name = "lbRemaining";
+            lbRemaining.Size = new Size(31, 20);
+            lbRemaining.TabIndex = 4;
+            lbRemaining.Text = "left";
             // 
             // label3
             // 
@@ -107,7 +107,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             Controls.Add(label3);
-            Controls.Add(label2);
+            Controls.Add(lbRemaining);
             Controls.Add(lbAmount);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
@@ -125,7 +125,7 @@
         private PictureBox pictureBox1;
         private Label label1;
         private Label lbAmount;
-        private Label label2;
+        private Label lbRemaining;
         private Label label3;
     }
 }

@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lbName = new Label();
             lbAmount = new Label();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // lbName
@@ -42,6 +44,7 @@
             lbName.Size = new Size(49, 20);
             lbName.TabIndex = 2;
             lbName.Text = "Name";
+            lbName.MouseEnter += WalletCard_MouseEnter;
             // 
             // lbAmount
             // 
@@ -53,6 +56,7 @@
             lbAmount.Size = new Size(77, 25);
             lbAmount.TabIndex = 3;
             lbAmount.Text = "Amount";
+            lbAmount.MouseEnter += WalletCard_MouseEnter;
             // 
             // WalletCard
             // 
@@ -61,8 +65,12 @@
             BackColor = Color.FromArgb(30, 30, 30);
             Controls.Add(lbAmount);
             Controls.Add(lbName);
+            Cursor = Cursors.Hand;
             Name = "WalletCard";
             Size = new Size(229, 76);
+            MouseEnter += WalletCard_MouseEnter;
+            MouseLeave += WalletCard_MouseLeave;
+            MouseHover += WalletCard_MouseHover;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -71,5 +79,6 @@
 
         private Label lbName;
         private Label lbAmount;
+        private ToolTip toolTip1;
     }
 }

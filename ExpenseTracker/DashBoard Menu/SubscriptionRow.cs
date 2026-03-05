@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-    public partial class TransactionRow : UserControl
+    public partial class SubscriptionRow : UserControl
     {
         private Label lblTitle;
         private Label lblAmount;
         private PictureBox pbIcon;
 
-        public TransactionRow()
+        public SubscriptionRow()
         {
             InitializeControls();
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label2 = new Label();
             panel2 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -40,13 +41,16 @@
             SubscriptionPanel = new FlowLayoutPanel();
             WalletsLayoutPanel = new FlowLayoutPanel();
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             label1 = new Label();
             btAddWallet = new CustomButton();
+            toolTip = new ToolTip(components);
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             TransactionsPanel.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -79,7 +83,7 @@
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 94);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(344, 560);
+            flowLayoutPanel1.Size = new Size(344, 511);
             flowLayoutPanel1.TabIndex = 4;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -176,6 +180,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(WalletsLayoutPanel);
             panel1.Controls.Add(btAddWallet);
@@ -185,6 +190,18 @@
             panel1.Size = new Size(1051, 262);
             panel1.TabIndex = 4;
             panel1.Paint += panel1_Paint;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Image = Properties.Resources._2725164__1_1;
+            pictureBox1.Location = new Point(873, 13);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(40, 40);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // label1
             // 
@@ -238,6 +255,7 @@
             TransactionsPanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -256,5 +274,7 @@
         private Label label1;
         private CustomButton btAddWallet;
         private FlowLayoutPanel MoneyPanel;
+        private PictureBox pictureBox1;
+        private ToolTip toolTip;
     }
 }

@@ -14,13 +14,17 @@ namespace ExpenseTracker
 
     public partial class TransactionItem : UserControl
     {
-        public TransactionItem()
+        private int transactionId; // Hidden ID for internal use
+        public TransactionItem(int transactionId)
         {
             InitializeComponent();
             this.BackColor = Color.FromArgb(30, 30, 30);
             // UX Polish: Make the whole row change color when you hover over it
             this.MouseEnter += (s, e) => this.BackColor = Color.FromArgb(40, 40, 40);
             this.MouseLeave += (s, e) => this.BackColor = Color.FromArgb(30, 30, 30); // Or your default color
+            this.transactionId = transactionId;
+            
+            toolTip.SetToolTip(pictureBox1,"Edit Transaction.");
         }
 
         // 1. Title Property
@@ -46,11 +50,12 @@ namespace ExpenseTracker
 
         // 4. Data Property (Hidden ID)
         // Useful for knowing WHICH transaction this is (e.g., ID 105)
-        public int TransactionId { get; set; }
+        
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+        private void pictureBox1_Click(object sender, EventArgs e) { 
+        
+            EditTransactionForm editForm = new EditTransactionForm(transactionId); 
+            editForm.ShowDialog(); 
         }
 
         private void pictureBox1_MouseHover(object sender, EventArgs e)

@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             leftBigPanel = new Panel();
             TopPanel = new Panel();
-            customButton1 = new CustomButton();
+            btNext = new CustomButton();
+            btAddTransaction = new CustomButton();
             label1 = new Label();
             lbWalletName = new Label();
             TransactionsFlowLayoutPanel = new FlowLayoutPanel();
@@ -45,6 +47,8 @@
             CategoriesLimitsFlow = new FlowLayoutPanel();
             multiUseRectangle2 = new MultiUseRectangle();
             multiUseRectangle1 = new MultiUseRectangle();
+            ToolTip = new ToolTip(components);
+            btRemoveWallet = new CustomButton();
             leftBigPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             rightBigPanel.SuspendLayout();
@@ -64,7 +68,9 @@
             // 
             // TopPanel
             // 
-            TopPanel.Controls.Add(customButton1);
+            TopPanel.Controls.Add(btRemoveWallet);
+            TopPanel.Controls.Add(btNext);
+            TopPanel.Controls.Add(btAddTransaction);
             TopPanel.Controls.Add(label1);
             TopPanel.Controls.Add(lbWalletName);
             TopPanel.Dock = DockStyle.Top;
@@ -73,32 +79,53 @@
             TopPanel.Size = new Size(640, 182);
             TopPanel.TabIndex = 1;
             // 
-            // customButton1
+            // btNext
             // 
-            customButton1.BackColor = Color.Black;
-            customButton1.BackgroundColor = Color.Black;
-            customButton1.BorderColor = Color.PaleVioletRed;
-            customButton1.BorderRadius = 20;
-            customButton1.BorderSize = 0;
-            customButton1.Cursor = Cursors.Hand;
-            customButton1.FlatAppearance.BorderSize = 0;
-            customButton1.FlatAppearance.MouseOverBackColor = Color.Gray;
-            customButton1.FlatStyle = FlatStyle.Flat;
-            customButton1.ForeColor = Color.White;
-            customButton1.Location = new Point(435, 118);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(188, 50);
-            customButton1.TabIndex = 2;
-            customButton1.Text = "Add Transaction";
-            customButton1.TextColor = Color.White;
-            customButton1.UseVisualStyleBackColor = false;
-            customButton1.Click += customButton1_Click;
+            btNext.BackColor = Color.Black;
+            btNext.BackgroundColor = Color.Black;
+            btNext.BorderColor = Color.PaleVioletRed;
+            btNext.BorderRadius = 20;
+            btNext.BorderSize = 0;
+            btNext.Cursor = Cursors.Hand;
+            btNext.FlatAppearance.BorderSize = 0;
+            btNext.FlatStyle = FlatStyle.Flat;
+            btNext.ForeColor = Color.White;
+            btNext.Location = new Point(537, 12);
+            btNext.Name = "btNext";
+            btNext.Size = new Size(86, 60);
+            btNext.TabIndex = 0;
+            btNext.Text = "Next";
+            btNext.TextColor = Color.White;
+            btNext.UseVisualStyleBackColor = false;
+            btNext.Click += btNext_Click;
+            // 
+            // btAddTransaction
+            // 
+            btAddTransaction.BackColor = Color.Black;
+            btAddTransaction.BackgroundColor = Color.Black;
+            btAddTransaction.BorderColor = Color.PaleVioletRed;
+            btAddTransaction.BorderRadius = 20;
+            btAddTransaction.BorderSize = 0;
+            btAddTransaction.Cursor = Cursors.Hand;
+            btAddTransaction.FlatAppearance.BorderSize = 0;
+            btAddTransaction.FlatAppearance.MouseOverBackColor = Color.Gray;
+            btAddTransaction.FlatStyle = FlatStyle.Flat;
+            btAddTransaction.ForeColor = Color.White;
+            btAddTransaction.Location = new Point(435, 118);
+            btAddTransaction.Name = "btAddTransaction";
+            btAddTransaction.Size = new Size(188, 50);
+            btAddTransaction.TabIndex = 2;
+            btAddTransaction.Text = "Add Transaction";
+            btAddTransaction.TextColor = Color.White;
+            btAddTransaction.UseVisualStyleBackColor = false;
+            btAddTransaction.Click += customButton1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(64, 64, 64);
+            label1.ForeColor = Color.WhiteSmoke;
             label1.Location = new Point(3, 124);
             label1.Name = "label1";
             label1.Size = new Size(140, 31);
@@ -110,7 +137,7 @@
             lbWalletName.AutoSize = true;
             lbWalletName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbWalletName.ForeColor = SystemColors.ActiveCaptionText;
-            lbWalletName.Location = new Point(48, 12);
+            lbWalletName.Location = new Point(3, 12);
             lbWalletName.Name = "lbWalletName";
             lbWalletName.Size = new Size(254, 41);
             lbWalletName.TabIndex = 0;
@@ -124,6 +151,7 @@
             TransactionsFlowLayoutPanel.Name = "TransactionsFlowLayoutPanel";
             TransactionsFlowLayoutPanel.Size = new Size(640, 709);
             TransactionsFlowLayoutPanel.TabIndex = 0;
+            TransactionsFlowLayoutPanel.Paint += TransactionsFlowLayoutPanel_Paint;
             // 
             // rightBigPanel
             // 
@@ -248,6 +276,26 @@
             multiUseRectangle1.Size = new Size(201, 106);
             multiUseRectangle1.TabIndex = 0;
             // 
+            // btRemoveWallet
+            // 
+            btRemoveWallet.BackColor = Color.Red;
+            btRemoveWallet.BackgroundColor = Color.Red;
+            btRemoveWallet.BorderColor = Color.PaleVioletRed;
+            btRemoveWallet.BorderRadius = 20;
+            btRemoveWallet.BorderSize = 0;
+            btRemoveWallet.Cursor = Cursors.Hand;
+            btRemoveWallet.FlatAppearance.BorderSize = 0;
+            btRemoveWallet.FlatStyle = FlatStyle.Flat;
+            btRemoveWallet.ForeColor = Color.White;
+            btRemoveWallet.Location = new Point(445, 12);
+            btRemoveWallet.Name = "btRemoveWallet";
+            btRemoveWallet.Size = new Size(86, 60);
+            btRemoveWallet.TabIndex = 3;
+            btRemoveWallet.Text = "Remove";
+            btRemoveWallet.TextColor = Color.White;
+            btRemoveWallet.UseVisualStyleBackColor = false;
+            btRemoveWallet.Click += btRemoveWallet_Click;
+            // 
             // WalletsMenuControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -275,7 +323,7 @@
         private FlowLayoutPanel TransactionsFlowLayoutPanel;
         private Panel rightBigPanel;
         private Panel TopPanel;
-        private CustomButton customButton1;
+        private CustomButton btAddTransaction;
         private Label label1;
         private Label lbWalletName;
         private MultiUseRectangle multiUseRectangle2;
@@ -288,5 +336,8 @@
         private Label lbText;
         private Label lbAddLimit;
         private FlowLayoutPanel CategoriesLimitsFlow;
+        private CustomButton btNext;
+        private ToolTip ToolTip;
+        private CustomButton btRemoveWallet;
     }
 }

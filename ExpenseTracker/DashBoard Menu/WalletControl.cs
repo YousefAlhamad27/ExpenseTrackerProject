@@ -12,10 +12,15 @@ namespace ExpenseTracker
 {
     public partial class WalletControl : UserControl
     {
-      
+
         public WalletControl()
         {
             InitializeComponent();
+        }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

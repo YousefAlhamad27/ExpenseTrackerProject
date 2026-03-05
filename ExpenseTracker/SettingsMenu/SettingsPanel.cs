@@ -8,50 +8,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerBussinessLogic;
 
 namespace ExpenseTracker.SettingsMenu
 {
+    
+
     public partial class SettingsPanel : UserControl
     {
+        public event EventHandler<int> WalletCardClicked;
         public SettingsPanel()
         {
             InitializeComponent();
-           
+
             flowLayoutPanel1.AllowDrop = true;
             flowLayoutPanel1.DragEnter += flowLayoutPanel1_DragEnter;
             flowLayoutPanel1.DragOver += Panel_DragOver;
 
             // 3. Load data
             LoadWallets();
+            numericUpDown1.Value = clsSettings.GetSalaryDay();
 
         }
         private Control _draggedItem;
 
         private void LoadWallets()
         {
-            for (int i = 5; i > 0; i--)
-            {
-                WalletCard card = new WalletCard();
+            List<clsWallet> wallets = clsWallet.GetAllWallets();
 
-                card.WalletName = "Wallet" + DateTime.Now.Ticks;
-                card.WalletBalance = (i * 100).ToString() + " USD";
-                card.MouseDown += Wallet_MouseDown;
-               
-                foreach (Control child in card.Controls)
-                {
-                    child.MouseDown += Wallet_MouseDown;
-                }
+
+            foreach (clsWallet wallet in wallets)
+            {
+                WalletCard card = new WalletCard(wallet.WalletID);
+                clsCurrency currency = clsCurrency.GetCurrencyByID(wallet.CurrencyID);
+                card.WalletName = wallet.Name;
+                card.WalletBalance = wallet.Balance + $" {currency.Code}";
+                 
+                card.Click += (s, e) => WalletCardClicked?.Invoke(s, wallet.WalletID);
+                
+
                 card.Width = flowLayoutPanel1.ClientSize.Width - 40; // Full width minus scrollbar space
                 flowLayoutPanel1.Controls.Add(card);
             }
 
-            
+
         }
         //private void AddWalletToPanel()
         //{
         //    WalletCard card = new WalletCard();
         //    card.Name = "Wallet" + DateTime.Now.Ticks;
-            
+
         //    card.Width = flowLayoutPanel1.ClientSize.Width - 40; // Full width minus scrollbar space
         //    // --- ENABLE DRAGGING ---
         //    // A. Allow the user to click and drag this card
@@ -67,7 +73,7 @@ namespace ExpenseTracker.SettingsMenu
         // 2. Configure the Panel itself in the Constructor or Form_Load
         public void SetupPanel()
         {
-            
+
             flowLayoutPanel1.DragEnter += flowLayoutPanel1_DragEnter;
             flowLayoutPanel1.DragOver += Panel_DragOver;
         }
@@ -93,10 +99,10 @@ namespace ExpenseTracker.SettingsMenu
                 }
             }
 
-            }
+        }
 
         // EVENT 2: The mouse enters the panel area
-      
+
 
         // EVENT 3: The magic "Live Reordering"
         private void Panel_DragOver(object sender, DragEventArgs e)
@@ -122,7 +128,7 @@ namespace ExpenseTracker.SettingsMenu
                 flowLayoutPanel1.Invalidate();
             }
         }
-        
+
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
@@ -140,5 +146,33 @@ namespace ExpenseTracker.SettingsMenu
             }
 
         }
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true; // Ignore non-numeric input
+                return;
+            }
+            if ((byte)e.KeyChar + numericUpDown1.Value > 31&&e.KeyChar!=(char)Keys.Enter)
+            {
+                e.Handled = true;
+                return;
+
+            }
+            if(numericUpDown1.Value!=0)
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                    if (clsSettings.UpdateSalaryDay((byte)numericUpDown1.Value))
+                    {
+                        numericUpDown1.Value = clsSettings.GetSalaryDay();
+                        MessageBox.Show("Value saved: " + numericUpDown1.Value, "Done");
+                    }
+
+                    else
+                        return;
+            }
         }
+    }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrackerBussinessLogic;
 
@@ -11,9 +12,11 @@ using TrackerBussinessLogic;
 namespace TrackerBussinessLogic.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260217112251_NotNullAmount")]
+    partial class NotNullAmount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,23 +105,13 @@ namespace TrackerBussinessLogic.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastPaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WalletID")
-                        .HasColumnType("int");
-
                     b.HasKey("SubscriptionID");
-
-                    b.HasIndex("CategoryID");
-
-                    b.HasIndex("WalletID");
 
                     b.ToTable("Subscriptions");
                 });
@@ -191,11 +184,11 @@ namespace TrackerBussinessLogic.Migrations
                     b.Property<int>("DestinationWalletID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("FirstAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("FirstAmount")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("SecondAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SecondAmount")
+                        .HasColumnType("float");
 
                     b.Property<int>("SourceWalletID")
                         .HasColumnType("int");
@@ -232,9 +225,6 @@ namespace TrackerBussinessLogic.Migrations
                     b.Property<int>("CurrencyID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -251,21 +241,6 @@ namespace TrackerBussinessLogic.Migrations
                     b.HasOne("TrackerBussinessLogic.clsCategory", null)
                         .WithMany()
                         .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TrackerBussinessLogic.clsSubscription", b =>
-                {
-                    b.HasOne("TrackerBussinessLogic.clsCategory", null)
-                        .WithMany()
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TrackerBussinessLogic.clsWallet", null)
-                        .WithMany()
-                        .HasForeignKey("WalletID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
