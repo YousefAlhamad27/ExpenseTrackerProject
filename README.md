@@ -3,6 +3,7 @@
 A full-stack Windows Forms financial management application utilizing Entity Framework Core for strict data management and optimized database queries.
 
 ## 📸 Application Previews
+![Dashboard View](docs/dashboard-view.png)
 ![Transaction Transfer Modal](docs/transfer-modal.png)
 ![Wallet & Limits View](docs/wallet-limits.png)
 
