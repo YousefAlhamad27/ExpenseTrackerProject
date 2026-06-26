@@ -343,6 +343,16 @@ namespace ExpenseTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap transaction {
+            get {
+                object obj = ResourceManager.GetObject("transaction", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap wallet_icon_5990__1_ {
             get {
                 object obj = ResourceManager.GetObject("wallet-icon-5990 (1)", resourceCulture);

@@ -76,7 +76,7 @@
             // pictureBox2
             // 
             pictureBox2.Dock = DockStyle.Left;
-            pictureBox2.Image = Properties.Resources.Forggy1;
+            pictureBox2.Image = Properties.Resources.transaction;
             pictureBox2.Location = new Point(0, 0);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(38, 70);
