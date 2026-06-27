@@ -17,6 +17,10 @@ This application integrates a robust desktop UI with modern data access technolo
 * Data Access Layer: Implements Entity Framework Core to handle complex database transactions (such as inter-account transfers), relationships, and queries efficiently without writing raw SQL.
 * Database: Fully relational SQL Server database ensuring ACID compliance and data integrity for all financial records.
 
+## Database Architecture
+![Database Schema](Docs/database-Diagram.PNG)
+
+
 ## Key Features
 * Multi-Currency Wallets: Aggregate totals and track individual transactions across different accounts and currencies (USD, EUR, CAD, AUD).
 * Complex Transactions: Securely process income, expenses, and inter-account transfers using strict database logic to maintain balanced ledgers.
